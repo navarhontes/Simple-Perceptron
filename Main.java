@@ -1,6 +1,6 @@
 public class Main{
     public static void main(String[] args) {
-        int[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+        double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
         int[] target = {0, 0, 0, 1};
         
         Perceptron perceptron = new Perceptron(2);

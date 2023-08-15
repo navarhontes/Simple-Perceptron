@@ -7,6 +7,8 @@ public class Perceptron {
     
     public Perceptron(int inputSize) {
         this.inputSize = inputSize; 
+
+        // Currently always initializas bias and weights randomly. 
         weights = new double[inputSize];
         Random rand = new Random();
         for (int i = 0; i < inputSize; i++) {
@@ -24,11 +26,12 @@ public class Perceptron {
     }
 
     public int getInputSize(){
-        return this.inputSize; 
+        return this.inputSize;
     }
     
-    public int predict(int[] inputs) {
+    public int predict(double[] inputs) {
         double weightedSum = 0;
+        // should either have correct size as precondition, or check and catch exception 
         for (int i = 0; i < inputs.length; i++) {
             weightedSum += inputs[i] * weights[i];
         }
@@ -36,7 +39,7 @@ public class Perceptron {
         return (int) output;
     }
     
-    public void train(int[][] inputs, int[] target, double learningRate, int epochs) {
+    public void train(double[][] inputs, int[] target, double learningRate, int epochs) {
         for (int epoch = 0; epoch < epochs; epoch++) {
             for (int i = 0; i < inputs.length; i++) {
                 int prediction = predict(inputs[i]);
