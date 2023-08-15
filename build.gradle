@@ -1,0 +1,4 @@
+dependencies {
+    // Your existing dependencies
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0' // Use the latest version
+}
