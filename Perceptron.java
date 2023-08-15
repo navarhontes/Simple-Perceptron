@@ -3,8 +3,10 @@ import java.util.Random;
 public class Perceptron {
     private double[] weights;
     private double bias;
+    private int inputSize; 
     
     public Perceptron(int inputSize) {
+        this.inputSize = inputSize; 
         weights = new double[inputSize];
         Random rand = new Random();
         for (int i = 0; i < inputSize; i++) {
@@ -19,6 +21,10 @@ public class Perceptron {
 
     public double[] getWeights(){
         return this.weights; 
+    }
+
+    public int getInputSize(){
+        return this.inputSize; 
     }
     
     public int predict(int[] inputs) {
