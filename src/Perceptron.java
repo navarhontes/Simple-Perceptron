@@ -43,17 +43,18 @@ public class Perceptron {
         return (int) output;
     }
     
-    public void train(double[][] inputs, int[] target, double learningRate, int epochs) {
+    public void train(double[][] inputs, int[] target, int epochs) {
         for (int epoch = 0; epoch < epochs; epoch++) {
             // should probably make it stop if no updates 
             for (int i = 0; i < inputs.length; i++) {
                 int prediction = predict(inputs[i]);
                 int error = target[i] - prediction;
+
                 for (int j = 0; j < weights.length; j++) {
                     // is 0 1 nicer or + - nicer? 
-                    weights[j] += learningRate * error * inputs[i][j];
+                    weights[j] += error * inputs[i][j];
                 }
-                bias += learningRate * error;
+                bias += error;
             }
         }
     }

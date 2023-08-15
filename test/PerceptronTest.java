@@ -13,7 +13,7 @@ public class PerceptronTest {
         int[] target = {0, 0, 0, 1};
 
         Perceptron perceptron = new Perceptron(2);
-        perceptron.train(inputs, target, 0.1, 100);
+        perceptron.train(inputs, target, 100);
 
         double[] weights = perceptron.getWeights();
         double bias = perceptron.getBias();
