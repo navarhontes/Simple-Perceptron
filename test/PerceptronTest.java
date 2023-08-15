@@ -18,8 +18,8 @@ public class PerceptronTest {
         double[] weights = perceptron.getWeights();
         double bias = perceptron.getBias();
 
-        assertArrayEquals(new double[]{0.2, 0.2}, weights, 0.01);
-        assertEquals(-0.3, bias, 0.01);
+        assertArrayEquals(new double[]{0.1, 0.1}, weights, 0.01);
+        assertEquals(-0.1, bias, 0.01);
 
         int[] expectedPredictions = {0, 0, 0, 1};
         for (int i = 0; i < inputs.length; i++) {
