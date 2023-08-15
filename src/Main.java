@@ -1,3 +1,4 @@
+package src;
 public class Main{
     public static void main(String[] args) {
         double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
