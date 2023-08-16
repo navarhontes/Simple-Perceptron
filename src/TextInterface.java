@@ -25,7 +25,7 @@ public class TextInterface {
             
             switch (choice) {
                 case 0:
-                    perceptronFacade = createPerceptronFacade(scanner);
+                    createPerceptron(scanner, perceptronFacade);
                     break;
                 case 1:
                     trainPerceptron(scanner, perceptronFacade);
@@ -55,6 +55,18 @@ public class TextInterface {
             inputSize = getValidIntInput(scanner);
         }
         return new PerceptronFacade(inputSize); 
+    }
+
+    private static PerceptronFacade createPerceptron(Scanner scanner, PerceptronFacade perceptronFacade) {
+        // Create and return an instance of PerceptronFacade with necessary parameters
+        System.out.print("Enter the input dimension (must be a positive integer!): ");
+        int inputSize = getValidIntInput(scanner);
+        while(inputSize <= 0){
+            System.out.println("Invalid input. Please enter a valid integer.");
+            inputSize = getValidIntInput(scanner);
+        }
+        perceptronFacade.createNewPerceptron(inputSize); 
+        return perceptronFacade; 
     }
 
     private static void trainPerceptron(Scanner scanner, PerceptronFacade perceptronFacade) {
@@ -115,7 +127,7 @@ public class TextInterface {
         System.out.println("Training completed.");
         perceptronFacade.printWeightsAndBias();
         for (int i = 0; i < inputs.length; i++) {
-            int prediction = perceptronFacade.labelInput(inputs[i]);
+            int prediction = perceptronFacade.predict(inputs[i]);
             System.out.println("Input: [" + inputs[i][0] + ", " + inputs[i][1] + "], Target: " +
                     targets[i] + ", Predicted: " + prediction);
         }
@@ -131,7 +143,7 @@ public class TextInterface {
             inputs[i] = getValidDoubleInput(scanner); 
         }
         
-        int prediction = perceptronFacade.labelInput(inputs);
+        int prediction = perceptronFacade.predict(inputs);
         System.out.println("Prediction: " + prediction);
     }
 

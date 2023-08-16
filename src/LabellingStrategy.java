@@ -5,5 +5,5 @@ public interface LabellingStrategy {
     String validLabels(); 
     
     int convertToOutputLabel(double output);
-    public int[] convertToTargetLabels(int[] labels);
+    public int[] convertToTrainingLabels(int[] labels);
 }

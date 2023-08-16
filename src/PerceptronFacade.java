@@ -33,6 +33,10 @@ public class PerceptronFacade {
         this.labellingStrategy = newStrategy; 
     }
 
+    public void createNewPerceptron(int inputSize){
+        this.perceptron = new Perceptron(inputSize); 
+    }
+
     /**
      * @return a string in the form of "Valid labels: x, y"
      */
@@ -48,11 +52,8 @@ public class PerceptronFacade {
     }
     
     public int predict(double[] inputs) {
-        return this.perceptron.predict(inputs); 
-    }
-
-    public int labelInput(double[] inputs) {
-        return this.labellingStrategy.convertToOutputLabel(this.predict(inputs)); 
+        int prediction = this.perceptron.predict(inputs); 
+        return this.labellingStrategy.convertToOutputLabel(prediction);
     }
     
     /**
