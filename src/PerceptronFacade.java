@@ -64,24 +64,11 @@ public class PerceptronFacade {
             for (int i = 0; i < inputs.length; i++) {
                 int prediction = predict(inputs[i]);
                 int error = target[i] - prediction;
-                
-                /*System.out.println("Input: [" + inputs[i][0] + ", " + inputs[i][1] + "], Target: " +
-                        target[i] + ", Predicted: " + prediction);
-                        */
                         
-
                 for (int j = 0; j < weights.length; j++) {
                     weights[j] += error * inputs[i][j];
                 }
                 bias += error;
-
-                /* 
-                System.out.print("Weights: ");
-                for (double weight : this.getWeights()) {
-                    System.out.print(weight + " ");
-                }
-                System.out.println("\nBias: " + this.getBias());
-                */
 
                 if(error != 0){
                     weightsUpdated = true; 
