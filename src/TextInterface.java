@@ -89,26 +89,9 @@ public class TextInterface {
         System.out.println("1"); 
 
         for (int i = 0; i < numDataPoints; i++) {
-            boolean validInput = false; 
-            
-            while(!validInput){
-                System.out.print("Data " + (i + 1) + ": ");
-                String[] data = scanner.nextLine().split(" ");
-                
-                if (data.length != inputDimension) {
-                    System.out.println("Invalid input. Please enter " + (inputDimension) + " values.");
-                } else{
-                    try{
-                        for (int j = 0; j < inputDimension; j++) {
-                            inputs[i][j] = Double.parseDouble(data[j]);
-                        }
-                        validInput = true; 
-                    } catch(InputMismatchException e){
-                        System.out.println("Invalid input. Please enter a valid decimal.");
-                    }
-                }
-            }
+            inputs[i] = getValidInputVector(scanner, inputDimension); 
             targets[i] = getValidIntInput(scanner); 
+            
             while(!perceptronFacade.isValidLabel(targets[i])){
                 System.out.println(perceptronFacade.validLabelsAsString()); 
                 targets[i] = getValidIntInput(scanner); 
@@ -192,6 +175,27 @@ public class TextInterface {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
                 scanner.nextLine(); // Consume invalid input
+            }
+        }
+    }
+
+    public static double[] getValidInputVector(Scanner scanner, int inputSize){
+        double[] inputs = new double[inputSize]; 
+
+        while(true){
+            String[] data = scanner.nextLine().split(" ");
+            
+            if (data.length != inputSize) {
+                System.out.println("Invalid input. Please enter " + (inputSize) + " values separated by spaces.");
+            } else{
+                try{
+                    for (int j = 0; j < inputSize; j++) {
+                        inputs[j] = Double.parseDouble(data[j]);
+                    }
+                    return inputs; 
+                } catch(InputMismatchException e){
+                    System.out.println("Invalid input. Please enter a valid decimal.");
+                }
             }
         }
     }

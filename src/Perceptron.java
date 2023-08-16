@@ -27,14 +27,6 @@ public class Perceptron{
         return this.inputSize;
     }
 
-    public void printWeightsAndBias(){
-        System.out.print("Weights: ");
-        for (double weight : this.getWeights()) {
-            System.out.print(weight + " ");
-        }
-        System.out.println("\nBias: " + this.getBias());
-    }
-
     public int predict(double[] inputs) {
         double weightedSum = 0;
         // should either have correct size as precondition, or check and catch exception 
