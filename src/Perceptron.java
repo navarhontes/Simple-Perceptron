@@ -5,6 +5,7 @@ public class Perceptron{
     private double bias;
     private int inputSize;
     
+
     public Perceptron(int inputSize) {
         this.inputSize = inputSize; 
 
