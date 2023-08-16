@@ -5,6 +5,8 @@ import src.Perceptron;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 public class PerceptronTest {
 
     @Test
@@ -88,7 +90,7 @@ public class PerceptronTest {
             actualPredictions[i] = perceptron.predict(inputs[i]);
         }
         // Since this case is not linearly separable
-        assertNotEquals(expectedPredictions, actualPredictions); 
+        assertFalse(Arrays.equals(expectedPredictions, actualPredictions)); 
     }
 
     @Test
@@ -106,7 +108,7 @@ public class PerceptronTest {
             actualPredictions[i] = perceptron.predict(inputs[i]);
         }
         // Since this case is not linearly separable
-        assertNotEquals(expectedPredictions, actualPredictions); 
+        assertFalse(Arrays.equals(expectedPredictions, actualPredictions)); 
     }
 }
 
