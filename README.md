@@ -30,7 +30,7 @@ Façade: PerceptronFacade delegates to Perceptron and LabellingStrategy. It coul
 
 ### Installation and running this program
 1. Clone this repository
-2. Navigate to the project directory (the folder is most likely titled `SimplePerceptron`)
+2. Navigate to the project directory (the folder is most likely titled `Simple-Perceptron`)
 3. Compile `TextInterface.java` from this folder. Command line: `javac src/TextInterface.java`
 4. Run the program: `java src/TextInterface`
 
