@@ -1,5 +1,3 @@
-package src;
-
 public class PerceptronFacade {
     private Perceptron perceptron; 
     private LabellingStrategy labellingStrategy; // Depend on the interface

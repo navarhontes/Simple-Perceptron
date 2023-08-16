@@ -1,5 +1,3 @@
-package src;
-
 public class Perceptron{
     private double[] weights;
     private double bias;

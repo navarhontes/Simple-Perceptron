@@ -1,5 +1,3 @@
-package src;
-
 public class MinusPlusLabellingStrategy implements LabellingStrategy{
     public boolean validLabel(int proposedLabel){
         return(proposedLabel == -1 || proposedLabel == 1); 

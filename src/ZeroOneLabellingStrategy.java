@@ -1,5 +1,3 @@
-package src;
-
 public class ZeroOneLabellingStrategy implements LabellingStrategy{
     public boolean validLabel(int proposedLabel){
         return(proposedLabel == 0 || proposedLabel == 1); 

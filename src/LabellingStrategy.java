@@ -1,5 +1,3 @@
-package src;
-
 public interface LabellingStrategy {
     boolean validLabel(int proposedLabel); 
     String validLabels(); 

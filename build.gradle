@@ -17,3 +17,13 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src'
+        }
+    }
+}
+
+defaultTasks 'compileJava', 'run'
