@@ -12,7 +12,6 @@ public class TextInterface {
 
         // To make sure we don't do anything else without a perceptron to work with 
         PerceptronFacade perceptronFacade = createPerceptronFacade(scanner);
-        perceptronFacade.setLabellingStrategy(new ZeroOneLabellingStrategy());
 
         while (true) {
             System.out.println("0. Initialise new Perceptron");
@@ -114,6 +113,12 @@ public class TextInterface {
         perceptronFacade.train(inputs, targets, epochs);
         
         System.out.println("Training completed.");
+        perceptronFacade.printWeightsAndBias();
+        for (int i = 0; i < inputs.length; i++) {
+            int prediction = perceptronFacade.labelInput(inputs[i]);
+            System.out.println("Input: [" + inputs[i][0] + ", " + inputs[i][1] + "], Target: " +
+                    targets[i] + ", Predicted: " + prediction);
+        }
     }
 
     private static void makePrediction(Scanner scanner, PerceptronFacade perceptronFacade) {

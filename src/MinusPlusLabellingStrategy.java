@@ -13,7 +13,7 @@ public class MinusPlusLabellingStrategy implements LabellingStrategy{
         return (output > 0) ? 1 : -1;
     }
 
-    public int[] convertToTargetLabels(int[] labels){
+    public int[] convertToTrainingLabels(int[] labels){
         int[] newLabels = new int[labels.length]; 
         for(int i = 0; i < labels.length; i++){
             newLabels[i] = (labels[i] > 0) ? 1 : 0; 

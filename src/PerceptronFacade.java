@@ -1,32 +1,24 @@
 package src;
 
 public class PerceptronFacade {
-    private double[] weights;
-    private double bias;
-    private int inputSize; 
-
+    private Perceptron perceptron; 
     private LabellingStrategy labellingStrategy; // Depend on the interface
     
     public PerceptronFacade(int inputSize) {
-        this.inputSize = inputSize; 
-
-        weights = new double[inputSize];
-        for (int i = 0; i < inputSize; i++) {
-            weights[i] = 0; 
-        }
-        bias = 0;
+        this.perceptron = new Perceptron(inputSize); 
+        this.labellingStrategy = new ZeroOneLabellingStrategy(); 
     }
 
     public double getBias(){
-        return this.bias; 
+        return this.perceptron.getBias(); 
     }
 
     public double[] getWeights(){
-        return this.weights; 
+        return this.perceptron.getWeights(); 
     }
 
     public int getInputSize(){
-        return this.inputSize;
+        return this.perceptron.getInputSize();
     }
 
     public void printWeightsAndBias(){
@@ -37,27 +29,26 @@ public class PerceptronFacade {
         System.out.println("\nBias: " + this.getBias());
     }
 
-    public String validLabelsAsString(){
-        return this.labellingStrategy.validLabels(); 
-    }
-
     public void setLabellingStrategy(LabellingStrategy newStrategy){
         this.labellingStrategy = newStrategy; 
     }
 
+    /**
+     * @return a string in the form of "Valid labels: x, y"
+     */
+    public String validLabelsAsString(){
+        return this.labellingStrategy.validLabels(); 
+    }
+
+    /**
+     * @return true if a label fits into the labelling strategy; false otherwise. 
+     */
     public boolean isValidLabel(int label){
         return this.labellingStrategy.validLabel(label); 
     }
     
     public int predict(double[] inputs) {
-        double weightedSum = 0;
-        // should either have correct size as precondition, or check and catch exception 
-        for (int i = 0; i < inputs.length; i++) {
-            weightedSum += inputs[i] * weights[i];
-        }
-        // if (weightedSum + bias > 0), then set to 1; else 0
-        int output = (weightedSum + bias > 0) ? 1 : 0;
-        return output; 
+        return this.perceptron.predict(inputs); 
     }
 
     public int labelInput(double[] inputs) {
@@ -73,27 +64,7 @@ public class PerceptronFacade {
         // weightsUpdated tracks whether any updates are actually happening or not, 
         // so that the training can stop if the categorizations are all correct 
         // and therefore not being updated. 
-        boolean weightsUpdated = true; 
-        target = this.labellingStrategy.convertToTargetLabels(target); 
-
-        int epoch = 0; 
-        while (epoch < epochs && weightsUpdated){
-            weightsUpdated = false; 
-            
-            for (int i = 0; i < inputs.length; i++) {
-                int prediction = predict(inputs[i]);
-                int error = target[i] - prediction;
-                        
-                for (int j = 0; j < weights.length; j++) {
-                    weights[j] += error * inputs[i][j];
-                }
-                bias += error;
-
-                if(error != 0){
-                    weightsUpdated = true; 
-                }
-            }
-            epoch++; 
-        }
+        target = this.labellingStrategy.convertToTrainingLabels(target); 
+        this.perceptron.train(inputs, target, epochs); 
     }
 }

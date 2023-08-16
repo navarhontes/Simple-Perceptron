@@ -13,7 +13,11 @@ public class ZeroOneLabellingStrategy implements LabellingStrategy{
         return (output > 0) ? 1 : 0;
     }
 
-    public int[] convertToTargetLabels(int[] labels){
-        return labels;
+    public int[] convertToTrainingLabels(int[] labels){
+        int[] newLabels = new int[labels.length]; 
+        for(int i = 0; i < labels.length; i++){
+            newLabels[i] = (labels[i] > 0) ? 1 : 0; 
+        }
+        return newLabels; 
     }
 }
