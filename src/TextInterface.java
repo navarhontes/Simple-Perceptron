@@ -12,12 +12,14 @@ public class TextInterface {
 
         // To make sure we don't do anything else without a perceptron to work with 
         PerceptronFacade perceptronFacade = createPerceptronFacade(scanner);
+        perceptronFacade.setLabellingStrategy(new ZeroOneLabellingStrategy());
 
         while (true) {
             System.out.println("0. Initialise new Perceptron");
             System.out.println("1. Train Perceptron");
-            System.out.println("2. Make Prediction");
-            System.out.println("3. Exit");
+            System.out.println("2. Make prediction");
+            System.out.println("3. Choose labelling convention");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = getValidIntInput(scanner);
@@ -33,6 +35,9 @@ public class TextInterface {
                     makePrediction(scanner, perceptronFacade);
                     break;
                 case 3:
+                    chooseLabellingConvention(scanner, perceptronFacade);
+                    break;
+                case 4:
                     System.out.println("Exiting the program. Goodbye!");
                     scanner.close();
                     return;
@@ -93,6 +98,10 @@ public class TextInterface {
                 }
             }
             targets[i] = getValidIntInput(scanner); 
+            while(!perceptronFacade.isValidLabel(targets[i])){
+                System.out.println(perceptronFacade.validLabelsAsString()); 
+                targets[i] = getValidIntInput(scanner); 
+            }
         }
         
         System.out.print("Enter number of epochs (must be a positive integer!): ");
@@ -117,8 +126,29 @@ public class TextInterface {
             inputs[i] = getValidDoubleInput(scanner); 
         }
         
-        int prediction = perceptronFacade.predict(inputs);
+        int prediction = perceptronFacade.labelInput(inputs);
         System.out.println("Prediction: " + prediction);
+    }
+
+    private static void chooseLabellingConvention(Scanner scanner, PerceptronFacade perceptronFacade){
+        while (true) {
+            System.out.println("0. Valid labels: 0, 1");
+            System.out.println("1. Valid labels: -1, 1");
+            System.out.print("Enter your choice: ");
+
+            int choice = getValidIntInput(scanner);
+            
+            switch (choice) {
+                case 0:
+                    perceptronFacade.setLabellingStrategy(new ZeroOneLabellingStrategy());
+                    return; 
+                case 1:
+                    perceptronFacade.setLabellingStrategy(new MinusPlusLabellingStrategy());
+                    return; 
+                default:
+                    System.out.println("Invalid choice. Please choose again.");
+            }
+        }
     }
 
     public static int getValidIntInput(Scanner scanner){

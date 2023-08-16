@@ -1,0 +1,9 @@
+package src;
+
+public interface LabellingStrategy {
+    boolean validLabel(int proposedLabel); 
+    String validLabels(); 
+    
+    int convertToOutputLabel(double output);
+    public int[] convertToTargetLabels(int[] labels);
+}
