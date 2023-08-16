@@ -44,7 +44,12 @@ public class TextInterface {
 
     private static PerceptronFacade createPerceptronFacade(Scanner scanner) {
         // Create and return an instance of PerceptronFacade with necessary parameters
-        int inputSize = getValidIntInput(scanner); 
+        System.out.print("Enter the input dimension (must be a positive integer!): ");
+        int inputSize = getValidIntInput(scanner);
+        while(inputSize <= 0){
+            System.out.println("Invalid input. Please enter a valid integer.");
+            inputSize = getValidIntInput(scanner);
+        }
         return new PerceptronFacade(inputSize); 
     }
 
@@ -52,6 +57,7 @@ public class TextInterface {
         System.out.print("Enter the number of training data points (must be a positive integer!): ");
         int numDataPoints = getValidIntInput(scanner);
         while(numDataPoints <= 0){
+            System.out.println("Invalid input. Please enter a valid integer.");
             numDataPoints = getValidIntInput(scanner);
         }
         
@@ -59,30 +65,40 @@ public class TextInterface {
         double[][] inputs = new double[numDataPoints][inputDimension];
         int[] targets = new int[numDataPoints];
         
-        System.out.println("Enter training data in the format [input1 input2 ... inputN target]:");
+        System.out.println("Enter training data in the following format:");
+        System.out.println("input1 input2 ... inputN"); 
+        System.out.println("target"); 
+        System.out.println("Example:"); 
+        System.out.println("1 1"); 
+        System.out.println("1"); 
+
         for (int i = 0; i < numDataPoints; i++) {
-            System.out.print("Data " + (i + 1) + ": ");
-            String[] data = scanner.nextLine().split(" ");
+            boolean validInput = false; 
             
-            if (data.length != inputDimension) {
-                System.out.println("Invalid input. Please enter " + (inputDimension) + " values.");
-                i--; // Retry this data point
-                continue;
-            }
-            
-            try{
-                for (int j = 0; j < inputDimension; j++) {
-                    inputs[i][j] = Double.parseDouble(data[j]);
+            while(!validInput){
+                System.out.print("Data " + (i + 1) + ": ");
+                String[] data = scanner.nextLine().split(" ");
+                
+                if (data.length != inputDimension) {
+                    System.out.println("Invalid input. Please enter " + (inputDimension) + " values.");
+                } else{
+                    try{
+                        for (int j = 0; j < inputDimension; j++) {
+                            inputs[i][j] = Double.parseDouble(data[j]);
+                        }
+                        validInput = true; 
+                    } catch(InputMismatchException e){
+                        System.out.println("Invalid input. Please enter a valid decimal.");
+                    }
                 }
-            } catch(InputMismatchException e){
-                System.out.println("Invalid input. Please enter a valid decimal.");
             }
-            targets[i] = Integer.parseInt(data[inputDimension]);
+            targets[i] = getValidIntInput(scanner); 
         }
         
         System.out.print("Enter number of epochs (must be a positive integer!): ");
         int epochs = getValidIntInput(scanner);
         while(epochs <= 0){
+            System.out.println("Invalid input. Please enter a valid integer.");
             epochs = getValidIntInput(scanner);
         }
         
@@ -108,15 +124,15 @@ public class TextInterface {
     public static int getValidIntInput(Scanner scanner){
         int input; 
         while (true){
-                try {
-                    input = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    return input; 
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a valid integer.");
-                    scanner.nextLine(); // Consume invalid input
-                }
+            try {
+                input = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                return input; 
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // Consume invalid input
             }
+        }
     }
 
     public static double getValidDoubleInput(Scanner scanner){
