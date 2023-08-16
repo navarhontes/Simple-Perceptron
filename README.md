@@ -29,6 +29,9 @@ Facade: PerceptronFacade delegates to Perceptron and LabellingStrategy. It could
 - Java Development Kit (JDK) 8 or later.
 - Gradle (optional, for building and running tests).
 
+### To run the program
+TextInterface.java for the text interface. 
+
 ### Extending the Program
 The Perceptron Program is designed to be extensible. To add new labeling strategies or enhance the program's functionality:
 1. Create a new `LabelingStrategy` implementation by implementing the `LabelingStrategy` interface.
