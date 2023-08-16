@@ -1,6 +1,6 @@
 package test;
 
-import src.Perceptron;
+import src.PerceptronFacade;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +12,7 @@ public class PerceptronTest {
         double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
         int[] target = {0, 0, 0, 1};
 
-        Perceptron perceptron = new Perceptron(2);
+        PerceptronFacade perceptron = new PerceptronFacade(2);
         perceptron.train(inputs, target, 100);
 
         double[] weights = perceptron.getWeights();
@@ -33,7 +33,7 @@ public class PerceptronTest {
         double[][] inputs = {{0, 0, 0}, {0, 0, 1}, {0, 1, 0}, {0, 1, 1}, {1, 0, 0}, {1, 0, 1}, {1, 1, 0}, {1, 1, 1}};
         int[] target = {0, 0, 0, 0, 0, 0, 0, 1};
 
-        Perceptron perceptron = new Perceptron(3);
+        PerceptronFacade perceptron = new PerceptronFacade(3);
         perceptron.train(inputs, target, 100);
         
         int[] expectedPredictions = {0, 0, 0, 0, 0, 0, 0, 1};
@@ -48,7 +48,7 @@ public class PerceptronTest {
         double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
         int[] target = {0, 0, 0, 1};
 
-        Perceptron perceptron = new Perceptron(2);
+        PerceptronFacade perceptron = new PerceptronFacade(2);
         perceptron.train(inputs, target, 100);
 
         int[] expectedPredictions = {0, 0, 0, 1};
@@ -64,7 +64,7 @@ public class PerceptronTest {
         double[][] inputs = {{-3, 2}, {-1, 1}, {-1, -1}, {2, 2}, {1, -1}};
         int[] target = {1, 0, 0, 0, 0};
 
-        Perceptron perceptron = new Perceptron(2);
+        PerceptronFacade perceptron = new PerceptronFacade(2);
         perceptron.train(inputs, target, 100);
 
         int[] expectedPredictions = {1, 0, 0, 0, 0};
@@ -79,7 +79,7 @@ public class PerceptronTest {
         double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
         int[] target = {0, 1, 1, 0};
 
-        Perceptron perceptron = new Perceptron(2);
+        PerceptronFacade perceptron = new PerceptronFacade(2);
         perceptron.train(inputs, target, 100);
 
         int[] expectedPredictions = {0, 0, 0, 1};
@@ -97,7 +97,7 @@ public class PerceptronTest {
         double[][] inputs = {{1, -1}, {1, 1}, {2, -1}, {2, 1}};
         int[] target = {0, 1, 1, 0};
 
-        Perceptron perceptron = new Perceptron(2);
+        PerceptronFacade perceptron = new PerceptronFacade(2);
         perceptron.train(inputs, target, 100);
 
         int[] expectedPredictions = {0, 1, 1, 0};

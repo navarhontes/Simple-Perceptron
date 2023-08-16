@@ -4,7 +4,7 @@ public class Main{
         double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
         int[] target = {0, 0, 0, 1};
         
-        Perceptron perceptron = new Perceptron(2);
+        PerceptronFacade perceptron = new PerceptronFacade(2);
         perceptron.train(inputs, target, 100);
         
         System.out.print("Weights: ");
