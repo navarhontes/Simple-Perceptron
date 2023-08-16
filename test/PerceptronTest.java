@@ -27,5 +27,20 @@ public class PerceptronTest {
             assertEquals(expectedPredictions[i], prediction);
         }
     }
+
+    @Test
+    public void testORGate() {
+        double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+        int[] target = {0, 0, 0, 1};
+
+        Perceptron perceptron = new Perceptron(2);
+        perceptron.train(inputs, target, 100);
+
+        int[] expectedPredictions = {0, 0, 0, 1};
+        for (int i = 0; i < inputs.length; i++) {
+            int prediction = perceptron.predict(inputs[i]);
+            assertEquals(expectedPredictions[i], prediction);
+        }
+    }
 }
 
